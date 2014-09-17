@@ -1,0 +1,70 @@
+<!DOCTY
+PE html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="/style/menu.css">
+
+<script>
+function showRSS(str) {
+  if (str.length==0) { 
+    document.getElementById("rssOutput").innerHTML="";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("rssOutput").innerHTML=xmlhttp.responseText;
+    }
+  }
+  xmlhttp.open("GET","getrss.php?q="+str,true);
+  xmlhttp.send();
+}
+</script>
+
+
+</head>
+
+<html>
+<body>
+
+<?php
+echo "Today is " . date("Y/m/d") . "<br>";
+?>
+
+
+
+<form>
+<select onchange="showRSS(this.value)">
+<option value="">Select an RSS-feed:</option>
+<option value="Google">Google News</option>
+<option value="NBC">NBC News</option>
+</select>
+</form>
+<br>
+<div id="rssOutput">RSS-feed will be listed here...</div>
+
+
+
+<nav class="dropdownmenu">
+  <ul>
+    <li><a href="http://www.jochaho.com/wordpress/">Home</a></li>
+    <li><a href="http://www.jochaho.com/wordpress/about-pritesh-badge/">About Me</a></li>
+    <li><a href="#">Articles on HTML5 & CSS3</a>
+      <ul id="submenu">
+        <li><a href="http://www.jochaho.com/wordpress/difference-between-svg-vs-canvas/">Difference between SVG vs. Canvas</a></li>
+        <li><a href="http://www.jochaho.com/wordpress/new-features-in-html5/">New features in HTML5</a></li>
+        <li><a href="http://www.jochaho.com/wordpress/creating-links-to-sections-within-a-webpage/">Creating links to sections within a webpage</a></li>
+      </ul>
+    </li>
+    <li><a href="http://www.jochaho.com/wordpress/category/news/">News</a></li>
+    <li><a href="http://www.jochaho.com/wordpress/about-pritesh-badge/">Contact Us</a></li>
+  </ul>
+</nav>
+
+</body>
+</html>
